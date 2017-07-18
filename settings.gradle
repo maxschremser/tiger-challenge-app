@@ -1,0 +1,4 @@
+include 'webapp'
+
+project(':webapp').projectDir = new File(settingsDir, 'webapp')
+project(':webapp').buildFileName = 'webapp.gradle'

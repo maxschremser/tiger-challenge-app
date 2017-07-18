@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+	<display-name>XPNSR Application</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<listener>
+		<listener-class>com.schremser.challenger.app.AppContext</listener-class>
+	</listener>
+	<servlet>
+		<description>JAX-RS Servlet</description>
+		<servlet-name>JAX-RS Servlet</servlet-name>
+		<servlet-class>com.ibm.websphere.jaxrs.server.IBMRestServlet</servlet-class>
+		<init-param>
+			<description>Challenger Application</description>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.schremser.challenger.app.ChallengerApplication</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<enabled>true</enabled>
+		<async-supported>false</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JAX-RS Servlet</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+</web-app>

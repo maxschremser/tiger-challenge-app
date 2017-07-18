@@ -1,0 +1,27 @@
+// deploy
+ext.deploydir = project.hasProperty('deploydir') ? project.deploydir : "${rootProject.projectDir}/build/deploy"
+ext.depxpnsr = ext.deploydir
+ext.liberty_server_dir = project.hasProperty('liberty_server_dir') ? project.liberty_server_dir : (depxpnsr + '/demo')
+
+// Third party component versions
+ext {
+    tool_jackson_core_version = '2.8.5'
+    tool_jackson_databind_version = '2.8.5'
+    tool_apache_poi_version = '3.15'
+    tool_cxf_rt_frontend_jaxrs_version = '3.1.6'
+    tool_commons_fileupload_version = '1.3.2'
+    tool_slf4j_simple_version = '1.7.25'
+}
+
+task clean(dependsOn: 'cleandeploy') {}
+
+task cleandeploy {
+    doLast {
+        println "Deleting deploydir: " + deploydir
+        delete deploydir
+    }
+}
+
+project.afterEvaluate() {
+    task('build').dependsOn ':webapp:deploy'
+}
